@@ -43,6 +43,9 @@ install_headers(
   subdir: 'fsautomata'
 )
 
+pkgconfig = import('pkgconfig')
+pkgconfig.generate(fsautomata, filebase: 'libfsautomata')
+
 executable(
   'mealy',
   'example/mealy.c',
