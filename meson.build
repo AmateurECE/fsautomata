@@ -30,7 +30,7 @@
 # IN THE SOFTWARE.
 ###
 
-project('fsautomata', 'c')
+project('fsautomata', 'c', version: '0.1.0')
 fsautomata = static_library(
   'fsautomata',
   'fsautomata/mealy.c',
