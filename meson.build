@@ -30,12 +30,25 @@
 # IN THE SOFTWARE.
 ###
 
-project('libgobiautomata', 'c', version: '0.1.0')
-libgobiautomata = static_library(
+project(
+  'libgobiautomata', 'c',
+  version: '0.2.0',
+  default_options: [
+    'buildtype=debug',
+    'warning_level=3',
+    'werror=true',
+    'c_std=c18',
+  ]
+)
+
+add_project_arguments('-frecord-gcc-switches', language: 'c')
+include_directories('gobiautomata')
+
+libgobiautomata = library(
   'gobiautomata',
   'gobiautomata/mealy.c',
-  c_args: ['-Wall', '-Wextra', '-Werror', '-O3'],
   install: true,
+  version: meson.project_version(),
 )
 
 install_headers(
@@ -49,7 +62,6 @@ pkgconfig.generate(libgobiautomata, filebase: 'libgobiautomata')
 executable(
   'mealy',
   'example/mealy.c',
-  include_directories: ['gobiautomata'],
   link_with: libgobiautomata,
 )
 

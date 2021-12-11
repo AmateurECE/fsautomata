@@ -7,7 +7,7 @@
 //
 // CREATED:         11/03/2021
 //
-// LAST EDITED:     11/07/2021
+// LAST EDITED:     12/11/2021
 //
 // Copyright 2021, Ethan D. Twardy
 //
@@ -32,7 +32,7 @@
 
 #include <stdbool.h>
 
-#include "mealy.h"
+#include <gobiautomata/mealy.h>
 
 void mealy_fsm_initialize(MealyFsm* state_machine) {
     state_machine->state = 0; // Initial value of the "flip-flop"
