@@ -7,7 +7,7 @@
 //
 // CREATED:         11/03/2021
 //
-// LAST EDITED:     11/07/2021
+// LAST EDITED:     12/11/2021
 //
 // Copyright 2021, Ethan D. Twardy
 //
@@ -30,8 +30,8 @@
 // IN THE SOFTWARE.
 ////
 
-#ifndef MEALY_H
-#define MEALY_H
+#ifndef GOBIAUTOMATA_MEALY_H
+#define GOBIAUTOMATA_MEALY_H
 
 #include <stddef.h>
 
@@ -107,6 +107,6 @@ void mealy_fsm_initialize(MealyFsm* state_machine);
 enum FsmEvent mealy_fsm_poll(MealyFsm* state_machine);
 const char* fsm_strerror(enum FsmFault fault);
 
-#endif // MEALY_H
+#endif // GOBIAUTOMATA_MEALY_H
 
 ///////////////////////////////////////////////////////////////////////////////

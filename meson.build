@@ -7,7 +7,7 @@
 #
 # CREATED:          11/03/2021
 #
-# LAST EDITED:      11/07/2021
+# LAST EDITED:      12/11/2021
 #
 # Copyright 2021, Ethan D. Twardy
 #
@@ -30,27 +30,27 @@
 # IN THE SOFTWARE.
 ###
 
-project('fsautomata', 'c', version: '0.1.0')
-fsautomata = static_library(
-  'fsautomata',
-  'fsautomata/mealy.c',
+project('libgobiautomata', 'c', version: '0.1.0')
+libgobiautomata = static_library(
+  'gobiautomata',
+  'gobiautomata/mealy.c',
   c_args: ['-Wall', '-Wextra', '-Werror', '-O3'],
   install: true,
 )
 
 install_headers(
-  'fsautomata/mealy.h',
-  subdir: 'fsautomata'
+  'gobiautomata/mealy.h',
+  subdir: 'gobiautomata'
 )
 
 pkgconfig = import('pkgconfig')
-pkgconfig.generate(fsautomata, filebase: 'libfsautomata')
+pkgconfig.generate(libgobiautomata, filebase: 'libgobiautomata')
 
 executable(
   'mealy',
   'example/mealy.c',
-  include_directories: ['fsautomata'],
-  link_with: fsautomata,
+  include_directories: ['gobiautomata'],
+  link_with: libgobiautomata,
 )
 
 ###############################################################################
