@@ -7,7 +7,7 @@
 //
 // CREATED:         11/03/2021
 //
-// LAST EDITED:     12/11/2021
+// LAST EDITED:     12/12/2021
 //
 // Copyright 2021, Ethan D. Twardy
 //
@@ -69,13 +69,9 @@ int do_final(int* state __attribute__((unused)),
     return 0;
 }
 
-static const StateTransition final_tt[] = {
-    { 0 }, // sentinel
-};
-
 static const MealyState state_table[] = {
     [STATE_INITIAL]={ STATE_INITIAL, NULL, NULL, do_initial, initial_tt },
-    [STATE_FINAL]={ STATE_FINAL, NULL, NULL, do_final, final_tt },
+    [STATE_FINAL] = { STATE_FINAL,   NULL, NULL, do_final,   NULL },
     { 0 }, // sentinel
 };
 
