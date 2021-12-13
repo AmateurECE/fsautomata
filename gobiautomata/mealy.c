@@ -7,7 +7,7 @@
 //
 // CREATED:         11/03/2021
 //
-// LAST EDITED:     12/12/2021
+// LAST EDITED:     12/13/2021
 //
 // Copyright 2021, Ethan D. Twardy
 //
@@ -72,13 +72,13 @@ enum FsmEvent mealy_fsm_poll(MealyFsm* state_machine) {
 
     index = 0;
     bool valid_transition = false;
+    int next_state = state_machine->current_state;
     while (FSM_STATE_INVALID != state->transition_table[index].identifier) {
         const int event = state->transition_table[index].event;
         const int flipflop = state->transition_table[index].state;
         if (event == result && (flipflop == state_machine->state ||
                 0 == flipflop)) {
-            state_machine->current_state =
-                state->transition_table[index].identifier;
+            next_state = state->transition_table[index].identifier;
             valid_transition = true;
         }
 
@@ -88,16 +88,22 @@ enum FsmEvent mealy_fsm_poll(MealyFsm* state_machine) {
     if (!valid_transition) {
         state_machine->fault = FSM_FAULT_NO_VALID_TRANSITION;
         return FSM_EVENT_FAULT;
-    } else {
-        if (NULL != state->exit) {
-            state->exit(state->identifier, state_machine->current_state,
-                user_data);
-        }
+    } else if (next_state == state_machine->current_state) {
+        // If the state function is attempting to transition us to the current
+        // state, let that happen, but don't inform the caller that anything
+        // has changed, and skip running the enter/exit functions.
+        return FSM_EVENT_NONE;
+    }
 
-        if (NULL != states[state_machine->current_state].enter) {
-            states[state_machine->current_state].enter(state->identifier,
-                state_machine->current_state, user_data);
-        }
+    state_machine->current_state = next_state;
+    if (NULL != state->exit) {
+        state->exit(state->identifier, state_machine->current_state,
+            user_data);
+    }
+
+    if (NULL != states[state_machine->current_state].enter) {
+        states[state_machine->current_state].enter(state->identifier,
+            state_machine->current_state, user_data);
     }
 
     return FSM_EVENT_STATE_CHANGE;
