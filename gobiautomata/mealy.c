@@ -7,7 +7,7 @@
 //
 // CREATED:         11/03/2021
 //
-// LAST EDITED:     12/11/2021
+// LAST EDITED:     12/12/2021
 //
 // Copyright 2021, Ethan D. Twardy
 //
@@ -75,7 +75,8 @@ enum FsmEvent mealy_fsm_poll(MealyFsm* state_machine) {
     while (FSM_STATE_INVALID != state->transition_table[index].identifier) {
         const int event = state->transition_table[index].event;
         const int flipflop = state->transition_table[index].state;
-        if (event == result && flipflop == state_machine->state) {
+        if (event == result && (flipflop == state_machine->state ||
+                0 == flipflop)) {
             state_machine->current_state =
                 state->transition_table[index].identifier;
             valid_transition = true;
