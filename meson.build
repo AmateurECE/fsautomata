@@ -7,7 +7,7 @@
 #
 # CREATED:          11/03/2021
 #
-# LAST EDITED:      12/11/2021
+# LAST EDITED:      12/12/2021
 #
 # Copyright 2021, Ethan D. Twardy
 #
@@ -32,7 +32,7 @@
 
 project(
   'libgobiautomata', 'c',
-  version: '0.2.0',
+  version: '0.3.0',
   default_options: [
     'buildtype=debug',
     'warning_level=3',
